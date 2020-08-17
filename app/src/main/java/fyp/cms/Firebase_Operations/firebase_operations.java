@@ -28,7 +28,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fyp.cms.Adapters.cattle_list_adapter;
 import fyp.cms.Adapters.orders_list_adapter;
@@ -465,6 +467,28 @@ public class firebase_operations {
                     OrdersList.setAdapter(new orders_list_adapter(orders,orderIds,context));
                 }
 
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
+                Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public static void processPayment(Context context,String orderId){
+        ProgressDialog pd=new ProgressDialog(context);
+        pd.setMessage("Procesing Payment....");
+        pd.show();
+        Map<String,Object> statusUpdate=new HashMap<>();
+        statusUpdate.put("status","Payment Processed");
+        FirebaseFirestore.getInstance().collection("Orders").document(orderId).update(statusUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                pd.dismiss();
+                if(task.isSuccessful()){
+                    Toast.makeText(context,"Payment Processed",Toast.LENGTH_LONG).show();
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
