@@ -476,18 +476,18 @@ public class firebase_operations {
             }
         });
     }
-    public static void processPayment(Context context,String orderId){
+    public static void changeStatus(Context context,String orderId,String status){
         ProgressDialog pd=new ProgressDialog(context);
-        pd.setMessage("Procesing Payment....");
+        pd.setMessage("Please Wait....");
         pd.show();
         Map<String,Object> statusUpdate=new HashMap<>();
-        statusUpdate.put("status","Payment Processed");
+        statusUpdate.put("status",status);
         FirebaseFirestore.getInstance().collection("Orders").document(orderId).update(statusUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 pd.dismiss();
                 if(task.isSuccessful()){
-                    Toast.makeText(context,"Payment Processed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Order Processed",Toast.LENGTH_LONG).show();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
