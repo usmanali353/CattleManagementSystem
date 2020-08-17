@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "14919133179",
+    "firebase_url": "https://cattle-management-system-7eb8d.firebaseio.com",
+    "project_id": "cattle-management-system-7eb8d",
+    "storage_bucket": "cattle-management-system-7eb8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14919133179:android:46cae29221116b20e98d5e",
+        "android_client_info": {
+          "package_name": "fyp.cms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14919133179-3nhek25184nikh0dr0ln3k1e2igqhd03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj3_lU8YPD6AA6YEpKmBre8KwhNEAJ7-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14919133179-3nhek25184nikh0dr0ln3k1e2igqhd03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

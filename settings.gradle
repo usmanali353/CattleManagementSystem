@@ -1,0 +1,2 @@
+rootProject.name='CattleManagementSystem'
+include ':app'

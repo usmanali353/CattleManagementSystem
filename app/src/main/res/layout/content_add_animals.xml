@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <ScrollView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".add_animals"
+        tools:showIn="@layout/activity_add_animals">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/upload"
+                android:id="@+id/productimg"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/toolbar"
+                />
+            <Button
+                android:text="Insert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/upload_btn"
+                android:layout_below="@+id/gender"
+                android:layout_margin="10dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Enter Name for the product"
+                android:id="@+id/productnametxt"
+                android:layout_below="@+id/productimg"
+                android:layout_margin="10dp"
+              />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Enter Age"
+                android:id="@+id/animal_age"
+                android:layout_below="@+id/productnametxt"
+                android:layout_margin="10dp"
+                />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Enter Number of teeth"
+                android:id="@+id/numOfTeeth"
+                android:entries="@array/no_of_teeth"
+                android:layout_below="@+id/animal_age"
+                android:layout_margin="10dp"
+                 />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/pricetxt"
+                android:hint="Enter Price for product"
+                android:layout_below="@+id/numOfTeeth"
+                android:layout_margin="10dp"
+                 />
+            <EditText
+                android:id="@+id/productquantitytxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pricetxt"
+                android:inputType="number"
+                android:hint="Enter Quantity"
+                android:layout_margin="10dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/productweighttxt"
+                android:hint="Enter Product Weight"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/productquantitytxt"
+                />
+            <Spinner
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/gender"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/productweighttxt"
+                />
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>
