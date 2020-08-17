@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import fyp.cms.Fragments.animals_list_fragment;
+import fyp.cms.Fragments.orders_list_fragment;
 import fyp.cms.Fragments.user_list_fragment;
 
 public class Admin_Home extends AppCompatActivity {
@@ -53,6 +54,7 @@ public class Admin_Home extends AppCompatActivity {
         viewpageradapter vpa=new viewpageradapter(getSupportFragmentManager());
         vpa.addfragment(new user_list_fragment(),"Users");
         vpa.addfragment(new animals_list_fragment(),"Animals");
+        vpa.addfragment(new orders_list_fragment(),"Orders");
         vp.setAdapter(vpa);
         // vp.setOffscreenPageLimit(2);
     }

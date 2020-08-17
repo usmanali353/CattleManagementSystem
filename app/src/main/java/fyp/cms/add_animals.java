@@ -31,7 +31,7 @@ import fyp.cms.Utils.utils;
 public class add_animals extends AppCompatActivity {
  EditText animalName,animalPrice,animalAge,animalQuantity,animalWeight;
  Button addBtn;
- Spinner animalGender,animalTeeth;
+ Spinner animalGender;
  ImageView animalImage;
  Bitmap bitmap;
     Uri image_project_uri;
@@ -46,7 +46,6 @@ public class add_animals extends AppCompatActivity {
         animalPrice=findViewById(R.id.pricetxt);
         animalAge=findViewById(R.id.animal_age);
         animalQuantity=findViewById(R.id.productquantitytxt);
-        animalTeeth=findViewById(R.id.numOfTeeth);
         animalGender=findViewById(R.id.gender);
         animalWeight=findViewById(R.id.productweighttxt);
         addBtn=findViewById(R.id.upload_btn);
@@ -66,8 +65,6 @@ public class add_animals extends AppCompatActivity {
                     animalName.setError("Provide Animal Name");
                 }else if(animalGender.getSelectedItemPosition()==0){
                     Toast.makeText(add_animals.this,"Select Animal gender",Toast.LENGTH_LONG).show();
-                }else if(animalTeeth.getSelectedItemPosition()==0){
-                    Toast.makeText(add_animals.this,"Select Animal Number of Teeth",Toast.LENGTH_LONG).show();
                 }else if(animalPrice.getText().toString().isEmpty()||Integer.parseInt(animalPrice.getText().toString())==0||Integer.parseInt(animalPrice.getText().toString())<50000){
                     animalPrice.setError("Price too Low");
                 }else if(animalAge.getText().toString().isEmpty()){
@@ -82,7 +79,7 @@ public class add_animals extends AppCompatActivity {
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         byte[] byteArray = stream.toByteArray();
                         bitmap.recycle();
-                        firebase_operations.addAnimal(add_animals.this,animalName.getText().toString(),animalWeight.getText().toString(),animalPrice.getText().toString(),animalQuantity.getText().toString(),Blob.fromBytes(byteArray),animalGender.getSelectedItem().toString(),animalTeeth.getSelectedItem().toString(),animalAge.getText().toString());
+                        firebase_operations.addAnimal(add_animals.this,animalName.getText().toString(),animalWeight.getText().toString(),Integer.parseInt(animalPrice.getText().toString()),Integer.parseInt(animalQuantity.getText().toString()),Blob.fromBytes(byteArray),animalGender.getSelectedItem().toString(),Integer.parseInt(animalAge.getText().toString()));
                     }else {
                         Toast.makeText(add_animals.this,"Network Not Available",Toast.LENGTH_LONG).show();
                     }

@@ -9,6 +9,11 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
+import fyp.cms.Firebase_Operations.firebase_operations;
+import fyp.cms.Models.user;
+
 public class orders_list_page extends AppCompatActivity {
   RecyclerView orders_list;
   SharedPreferences prefs;
@@ -21,8 +26,13 @@ public class orders_list_page extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         orders_list=findViewById(R.id.orders_list);
         prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        user u=new Gson().fromJson(prefs.getString("user_info",null),user.class);
         orders_list.setLayoutManager(new LinearLayoutManager(this));
-        //Firebase_Operations.getOrders(this, orders_list);
+        if(u.getRole().equals("Seller")) {
+            firebase_operations.getOrdersSeller(this, orders_list);
+        }else if(u.getRole().equals("Buyer")) {
+            firebase_operations.getOrdersBuyer(this, orders_list);
+        }
     }
 
 }

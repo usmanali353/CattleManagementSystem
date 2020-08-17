@@ -48,24 +48,13 @@
                 android:layout_below="@+id/productnametxt"
                 android:layout_margin="10dp"
                 />
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Enter Number of teeth"
-                android:id="@+id/numOfTeeth"
-                android:entries="@array/no_of_teeth"
-                android:layout_below="@+id/animal_age"
-                android:layout_margin="10dp"
-                 />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:id="@+id/pricetxt"
                 android:hint="Enter Price for product"
-                android:layout_below="@+id/numOfTeeth"
+                android:layout_below="@+id/animal_age"
                 android:layout_margin="10dp"
                  />
             <EditText

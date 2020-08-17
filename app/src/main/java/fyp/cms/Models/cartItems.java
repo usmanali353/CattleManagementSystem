@@ -90,12 +90,15 @@ public class cartItems {
         this.sellerId=sellerId;
         this.sellerAccountNo=sellerAccountNo;
     }
-    public cartItems(String name, String productid, String weight, int quantity, int price) {
+    public cartItems(String name, String productid, String weight, int quantity, int price,String gender,String sellerId,String sellerAccountNo) {
         this.name = name;
         this.productid = productid;
         this.weight = weight;
         this.quantity = quantity;
         this.price = price;
+        this.gender=gender;
+        this.sellerId=sellerId;
+        this.sellerAccountNo=sellerAccountNo;
     }
     public cartItems(){
 

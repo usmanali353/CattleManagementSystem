@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fyp.cms.Adapters.cattle_list_adapter;
+import fyp.cms.Adapters.orders_list_adapter;
 import fyp.cms.Adapters.user_list_adapter;
 import fyp.cms.Admin_Home;
 import fyp.cms.Models.Animal;
@@ -156,13 +158,13 @@ public class firebase_operations {
             }
         });
     }
-    public static void addAnimal(Context context, String animalName, String animalWeight, String animalPrice, String animalQuantity, Blob image, String gender, String numOfTeeth, String age){
+    public static void addAnimal(Context context, String animalName, String animalWeight, int animalPrice, int animalQuantity, Blob image, String gender, int age){
         ProgressDialog pd=new ProgressDialog(context);
         pd.setMessage("Adding Animal");
         pd.show();
         SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
         user u=new Gson().fromJson(prefs.getString("user_info",null),user.class);
-        FirebaseFirestore.getInstance().collection("Animals").document().set(new Animal(animalName,animalPrice,numOfTeeth,age,animalQuantity,gender,animalWeight,image,FirebaseAuth.getInstance().getCurrentUser().getUid(),u.getAccountNo())).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseFirestore.getInstance().collection("Animals").document().set(new Animal(animalName,animalPrice,age,animalQuantity,gender,animalWeight,image,FirebaseAuth.getInstance().getCurrentUser().getUid(),u.getAccountNo())).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 pd.dismiss();
@@ -365,7 +367,7 @@ public class firebase_operations {
                     }
                     new dbhelper(context).delete_all(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     context.startActivity(new Intent(context,buyer_home_page.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    ((AppCompatActivity)context).finish();
+                    ((FragmentActivity)context).finish();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -387,6 +389,87 @@ public class firebase_operations {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public static void getOrdersAdmin(Context context,RecyclerView OrdersList){
+        ProgressDialog pd=new ProgressDialog(context);
+        pd.setMessage("Fetching Orders....");
+        pd.show();
+        ArrayList<Orders> orders=new ArrayList<>();
+        ArrayList<String> orderIds=new ArrayList<>();
+        FirebaseFirestore.getInstance().collection("Orders").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                pd.dismiss();
+                if(queryDocumentSnapshots.getDocuments().size()>0){
+                    for(int i=0;i<queryDocumentSnapshots.getDocuments().size();i++){
+                        orders.add(queryDocumentSnapshots.getDocuments().get(i).toObject(Orders.class));
+                        orderIds.add(queryDocumentSnapshots.getDocuments().get(i).getId());
+                    }
+                    OrdersList.setAdapter(new orders_list_adapter(orders,orderIds,context));
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+              pd.dismiss();
+              Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public static void getOrdersSeller(Context context,RecyclerView OrdersList){
+        ProgressDialog pd=new ProgressDialog(context);
+        pd.setMessage("Fetching Orders....");
+        pd.show();
+        ArrayList<Orders> orders=new ArrayList<>();
+        ArrayList<String> orderIds=new ArrayList<>();
+        FirebaseFirestore.getInstance().collection("Orders").whereArrayContains("sellerId",FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                pd.dismiss();
+                if(queryDocumentSnapshots.getDocuments().size()>0){
+                    for(int i=0;i<queryDocumentSnapshots.getDocuments().size();i++){
+                        orders.add(queryDocumentSnapshots.getDocuments().get(i).toObject(Orders.class));
+                        orderIds.add(queryDocumentSnapshots.getDocuments().get(i).getId());
+                    }
+                    OrdersList.setAdapter(new orders_list_adapter(orders,orderIds,context));
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
+                Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public static void getOrdersBuyer(Context context,RecyclerView OrdersList){
+        ProgressDialog pd=new ProgressDialog(context);
+        pd.setMessage("Fetching Orders....");
+        pd.show();
+        ArrayList<Orders> orders=new ArrayList<>();
+        ArrayList<String> orderIds=new ArrayList<>();
+        FirebaseFirestore.getInstance().collection("Orders").whereEqualTo("customerId",FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                pd.dismiss();
+                if(queryDocumentSnapshots.getDocuments().size()>0){
+                    for(int i=0;i<queryDocumentSnapshots.getDocuments().size();i++){
+                        orders.add(queryDocumentSnapshots.getDocuments().get(i).toObject(Orders.class));
+                        orderIds.add(queryDocumentSnapshots.getDocuments().get(i).getId());
+                    }
+                    OrdersList.setAdapter(new orders_list_adapter(orders,orderIds,context));
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
                 Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
             }
         });

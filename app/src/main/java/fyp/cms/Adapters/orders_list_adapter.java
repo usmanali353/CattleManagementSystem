@@ -40,7 +40,7 @@ public class orders_list_adapter extends RecyclerView.Adapter<orders_list_adapte
     public void onBindViewHolder(@NonNull order_list_viewholder holder, int position) {
       holder.orderDate.setText(orders.get(position).getDate());
       holder.orderTotal.setText("Rs "+ String.valueOf(orders.get(position).getTotalPrice()));
-
+      holder.orderStatus.setText(orders.get(position).getStatus());
       holder.orderAddress.setText(orders.get(position).getLocation());
       holder.order_detail.setOnClickListener(new View.OnClickListener() {
           @Override

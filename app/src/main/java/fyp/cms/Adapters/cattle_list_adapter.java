@@ -85,7 +85,7 @@ user u;
                   }else if(u!=null&&u.getRole().equals("Buyer")){
                       View quantityPickerView=LayoutInflater.from(context).inflate(R.layout.quantity_picker,null);
                       final NumberPicker quantityPicker=quantityPickerView.findViewById(R.id.selectquantity);
-                      quantityPicker.setMaxValue(Integer.parseInt(animals.get(position).getQuantity()));
+                      quantityPicker.setMaxValue(animals.get(position).getQuantity());
                       quantityPicker.setMinValue(1);
                       android.app.AlertDialog quantitypicker=new android.app.AlertDialog.Builder(context)
                               .setTitle("Select Quantity")
@@ -94,18 +94,18 @@ user u;
                               .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                                   @Override
                                   public void onClick(DialogInterface dialog, int which) {
-                                      if(quantityPicker.getValue()>Integer.parseInt(animals.get(position).getQuantity())){
+                                      if(quantityPicker.getValue()>animals.get(position).getQuantity()){
                                           Toast.makeText(context,"Not Enough Available",Toast.LENGTH_LONG).show();
                                       }else{
                                           int alreadyExist= new dbhelper(context).check_if_already_exist(FirebaseAuth.getInstance().getCurrentUser().getUid(),animalIds.get(position));
                                           if(alreadyExist>0){
                                               Toast.makeText(context,"Animal Already Exists",Toast.LENGTH_LONG).show();
-                                              int isUpdated=new dbhelper(context).updateProduct(animalIds.get(position),Integer.parseInt(animals.get(position).getPrice())*quantityPicker.getValue(),quantityPicker.getValue(),FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                              int isUpdated=new dbhelper(context).updateProduct(animalIds.get(position),animals.get(position).getPrice()*quantityPicker.getValue(),quantityPicker.getValue(),FirebaseAuth.getInstance().getCurrentUser().getUid());
                                               if(isUpdated>0){
                                                   Toast.makeText(context,"Animal is Updated",Toast.LENGTH_LONG).show();
                                               }
                                           }else{
-                                              if(new dbhelper(context).insert_product_toshoppingcart(animals.get(position).getName(),Integer.parseInt(animals.get(position).getPrice())*quantityPicker.getValue(),animals.get(position).getImage().toBytes(),quantityPicker.getValue(), FirebaseAuth.getInstance().getCurrentUser().getUid(),animalIds.get(position),animals.get(position).getWeight(),animals.get(position).getGender(),animals.get(position).getSellerId(),animals.get(position).getSellerAccountNo())){
+                                              if(new dbhelper(context).insert_product_toshoppingcart(animals.get(position).getName(),animals.get(position).getPrice()*quantityPicker.getValue(),animals.get(position).getImage().toBytes(),quantityPicker.getValue(), FirebaseAuth.getInstance().getCurrentUser().getUid(),animalIds.get(position),animals.get(position).getWeight(),animals.get(position).getGender(),animals.get(position).getSellerId(),animals.get(position).getSellerAccountNo())){
                                                   Toast.makeText(context,"Animal Added to the Cart",Toast.LENGTH_LONG).show();
                                               }else{
                                                   Toast.makeText(context,"Animal not Added to the Cart due to some error",Toast.LENGTH_LONG).show();

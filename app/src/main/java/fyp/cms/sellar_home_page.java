@@ -51,6 +51,8 @@ SharedPreferences prefs;
             prefs.edit().remove("user_info").apply();
             startActivity(new Intent(sellar_home_page.this,Selection.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));
             finish();
+        }else if(item.getItemId()==R.id.myOrders){
+            startActivity(new Intent(sellar_home_page.this,orders_list_page.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -8,4 +8,8 @@
         android:id="@+id/signOut"
         android:title="Sign Out"
         />
+    <item
+        android:id="@+id/myOrders"
+        android:title="My Orders"
+        />
 </menu>

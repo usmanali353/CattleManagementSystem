@@ -36,6 +36,21 @@ public class orderDetails extends AppCompatActivity {
         orderedItems=findViewById(R.id.items);
         confirmBtn=findViewById(R.id.confirm_button);
         order=new Gson().fromJson(getIntent().getStringExtra("orderData"), Orders.class);
+        customerName.setText(order.getCustomerName());
+        phone.setText(order.getCustomerPhone());
+        email.setText(order.getCustomerEmail());
+        address.setText(order.getLocation());
+        StringBuilder sb=new StringBuilder();
+
+        for(int i=0;i<order.getCartItems().size();i++){
+
+            sb.append(order.getCartItems().get(i).getName()+" "+"("+order.getCartItems().get(i).getGender()+")"+" "+"x"+order.getCartItems().get(i).getQuantity());
+
+            sb.append("\n");
+
+        }
+
+        orderedItems.setText(sb.toString());
     }
 
     @Override

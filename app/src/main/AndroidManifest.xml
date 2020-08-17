@@ -66,11 +66,14 @@
         </activity>
         <activity
             android:name=".shopping_cart"
-            android:label="@string/title_activity_admin__home"
+            android:label="Shopping Cart"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Payment_Page"></activity>
         <activity android:name=".billing" />
-        <activity android:name=".orderDetails" />
+        <activity android:name=".orderDetails" android:label="Order Details"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".orders_list_page" android:label="Orders"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

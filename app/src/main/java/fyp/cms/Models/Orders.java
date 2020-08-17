@@ -8,7 +8,9 @@ public class Orders {
     String customerName,customerEmail,customerPhone;
     double deliveryLatitude,deliveryLongitude;
     ArrayList<cartItems> cartItems;
+    public Orders(){
 
+    }
     public String getDate() {
         return date;
     }

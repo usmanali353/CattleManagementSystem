@@ -45,7 +45,7 @@ public class billing extends AppCompatActivity {
             Toast.makeText(this,"No Products in Cart", Toast.LENGTH_LONG).show();
         }else{
             while(productsList.moveToNext()){
-                cartItems.add(new cartItems(productsList.getString(1),productsList.getString(6),productsList.getString(7),productsList.getInt(4),productsList.getInt(2)));
+                cartItems.add(new cartItems(productsList.getString(1), productsList.getString(6), productsList.getString(7), productsList.getInt(4), productsList.getInt(2), productsList.getString(8), productsList.getString(9), productsList.getString(10)));
             }
             checkOutItems.setLayoutManager(new LinearLayoutManager(this));
             checkOutItems.setAdapter(new purchased_item_adapter(cartItems,this));

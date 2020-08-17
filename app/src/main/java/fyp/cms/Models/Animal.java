@@ -14,6 +14,7 @@ public class Animal {
     }
 
     String sellerAccountNo;
+
     public Animal(){
 
     }
@@ -23,38 +24,6 @@ public class Animal {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getNumberOfTeeth() {
-        return numberOfTeeth;
-    }
-
-    public void setNumberOfTeeth(String numberOfTeeth) {
-        this.numberOfTeeth = numberOfTeeth;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
     }
 
     public String getGender() {
@@ -82,10 +51,34 @@ public class Animal {
     }
 
     String name;
-    String price;
-    String numberOfTeeth;
-    String age;
-    String quantity;
+    int price;
+    int age;
+    int quantity;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     String gender;
     String weight;
     Blob image;
@@ -100,10 +93,9 @@ public class Animal {
 
     String sellerId;
 
-    public Animal(String name, String price, String numberOfTeeth, String age, String quantity, String gender, String weight, Blob image,String sellerId,String sellerAccountNo) {
+    public Animal(String name, int price, int age, int quantity, String gender, String weight, Blob image,String sellerId,String sellerAccountNo) {
         this.name = name;
         this.price = price;
-        this.numberOfTeeth = numberOfTeeth;
         this.age = age;
         this.quantity = quantity;
         this.gender = gender;
