@@ -40,6 +40,7 @@ import fyp.cms.Models.Animal;
 import fyp.cms.Models.Orders;
 import fyp.cms.Models.dbhelper;
 import fyp.cms.Models.user;
+import fyp.cms.Payment_Page;
 import fyp.cms.buyer_home_page;
 import fyp.cms.sellar_home_page;
 
@@ -368,7 +369,7 @@ public class firebase_operations {
                         decrementQuantity(context,order.getCartItems().get(i).getQuantity(),order.getCartItems().get(i).getProductid());
                     }
                     new dbhelper(context).delete_all(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    context.startActivity(new Intent(context,buyer_home_page.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    context.startActivity(new Intent(context, Payment_Page.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     ((FragmentActivity)context).finish();
                 }
             }

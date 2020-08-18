@@ -39,6 +39,9 @@ public class orderDetails extends AppCompatActivity {
         address=findViewById(R.id.address);
         orderedItems=findViewById(R.id.items);
         confirmBtn=findViewById(R.id.confirm_button);
+        if(!order.getStatus().equals("Payment Processed")&&u!=null&&u.getRole().equals("Seller")){
+            confirmBtn.setVisibility(View.GONE);
+        }
         if(prefs.getString("user_role",null)!=null){
             confirmBtn.setText("Process Payment");
         }else if(u!=null&&u.getRole().equals("Seller")){
